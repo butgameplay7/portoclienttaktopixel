@@ -3,49 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portofolio Saya</title>
+  <title>Take To Pixel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #0e0e0e;
-      color: #ffffff;
+      background-color: #0f0f0f;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     nav {
+      background-color: #1a1a1a;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background-color: #121212;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
     }
 
     nav h1 {
-      font-size: 1.5rem;
       color: #00ffff;
+      font-size: 1.5rem;
     }
 
     nav ul {
-      display: flex;
-      gap: 1.5rem;
       list-style: none;
+      display: flex;
+      gap: 2rem;
     }
 
     nav ul li a {
+      color: #fff;
       text-decoration: none;
-      color: #ffffff;
       font-weight: 600;
-      transition: color 0.3s ease;
     }
 
     nav ul li a:hover {
@@ -54,94 +51,99 @@
 
     header {
       text-align: center;
-      padding: 6rem 2rem 3rem;
-      animation: fadeIn 1s ease-out;
+      padding: 3rem 2rem 1rem;
     }
 
     header h2 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
       color: #00ffff;
     }
 
-    header p {
-      font-size: 1.1rem;
-      color: #ccc;
-    }
-
-    .portfolio {
-      padding: 3rem 2rem;
-      max-width: 1080px;
-      margin: auto;
-    }
-
-    .portfolio h3 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: #00ffff;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      background-color: #1a1a1a;
-      border-radius: 12px;
+    .gallery-wrapper {
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .slider-container {
+      display: flex;
+      gap: 1.5rem;
+      padding: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .art-card {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 300px;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      animation: fadeInUp 0.7s ease-in-out;
     }
 
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2);
+    .art-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
 
-    .project-card img, .project-card video {
+    .art-card img, .art-card video {
       width: 100%;
-      height: 180px;
+      height: 220px;
       object-fit: cover;
+      display: block;
     }
 
-    .project-card h4, .project-card p {
+    .art-card .info {
       padding: 0.8rem 1rem;
     }
 
-    .project-card h4 {
+    .art-card .info h4 {
+      margin-bottom: 0.3rem;
       color: #00ffff;
-      font-size: 1.2rem;
     }
 
-    .project-card p {
+    .art-card .info p {
       font-size: 0.9rem;
       color: #ccc;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #00ffff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      z-index: 10;
+    }
+
+    .nav-left {
+      left: 0;
+    }
+
+    .nav-right {
+      right: 0;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: #121212;
-      color: #777;
       font-size: 0.9rem;
+      background: #1a1a1a;
+      color: #888;
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      header h2 {
-        font-size: 1.8rem;
-      }
-
-      nav ul {
-        gap: 1rem;
-      }
     }
   </style>
 </head>
@@ -149,51 +151,103 @@
   <nav>
     <h1>Portofolio</h1>
     <ul>
-      <li><a href="#home">Beranda</a></li>
-      <li><a href="#projects">Proyek</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#gallery">Galeri</a></li>
       <li><a href="#contact">Kontak</a></li>
     </ul>
   </nav>
 
   <header id="home">
-    <h2>Nama Kamu</h2>
-    <p>Pengembang Web | Desainer UI/UX | Freelancer</p>
+    <h2>Take To Pixel Studio</h2>
+    <p>Ilustrator | Merchandise | Animasi</p>
   </header>
 
-  <section class="portfolio" id="projects">
-    <h3>Proyek Saya</h3>
-    <div class="projects">
-      <div class="project-card">
-        <img src="assets/projek1.jpg" alt="Proyek 1">
-        <h4>Nama Proyek 1</h4>
-        <p>Deskripsi singkat proyek 1 yang menarik dan informatif.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/projek2.jpg" alt="Proyek 2">
-        <h4>Nama Proyek 2</h4>
-        <p>Deskripsi singkat proyek 2 yang menunjukkan keahlianmu.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/projek3.jpg" alt="Proyek 3">
-        <h4>Proyek Galeri Foto</h4>
-        <p>Dokumentasi visual dalam bentuk galeri untuk proyek acara seni budaya.</p>
-      </div>
-      <div class="project-card">
-        <video controls src="assets/video1.mp4"></video>
-        <h4>Video Proyek Dokumentasi</h4>
-        <p>Video highlight dari kegiatan pengembangan dan pameran hasil karya tim.</p>
-      </div>
-      <div class="project-card">
-        <img src="assets/foto1.jpg" alt="Foto Tanpa Deskripsi">
-      </div>
-      <div class="project-card">
-        <video controls src="assets/video2.mp4"></video>
-      </div>
-    </div>
-  </section>
+  <!-- Baris 1 -->
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('gallery', -1)">&larr;</button>
+    <section class="slider-container" id="gallery">
+      <div class="art-card"><img src="assets/sample1.jpg" alt="Artwork 1"><div class="info"><h4>Judul Karya 1</h4><p>Desain karakter 3D untuk game RPG.</p></div></div>
+      <div class="art-card"><video controls src="assets/video1.mp4"></video><div class="info"><h4>Motion Graphic</h4><p>Video opening untuk channel YouTube edukatif.</p></div></div>
+      <div class="art-card"><img src="assets/sample2.jpg" alt="Artwork 2"></div>
+      <div class="art-card"><img src="assets/sample3.jpg" alt="Artwork 3"><div class="info"><h4>Illustration Cover</h4><p>Artwork sampul untuk komik online.</p></div></div>
+      <div class="art-card"><video controls src="assets/video2.mp4"></video></div>
+      <div class="art-card"><img src="assets/sample4.jpg" alt="Artwork 4"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('gallery', 1)">&rarr;</button>
+  </div>
+
+  <!-- Baris 2 sampai 6 dengan panah -->
+  <script>
+    let baris = 1;
+  </script>
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('baris2', -1)">&larr;</button>
+    <section class="slider-container" id="baris2">
+      <div class="art-card"><img src="assets/sample5.jpg" alt="Artwork 5"></div>
+      <div class="art-card"><img src="assets/sample6.jpg" alt="Artwork 6"></div>
+      <div class="art-card"><img src="assets/sample7.jpg" alt="Artwork 7"></div>
+      <div class="art-card"><img src="assets/sample8.jpg" alt="Artwork 8"></div>
+      <div class="art-card"><img src="assets/sample9.jpg" alt="Artwork 9"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('baris2', 1)">&rarr;</button>
+  </div>
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('baris3', -1)">&larr;</button>
+    <section class="slider-container" id="baris3">
+      <div class="art-card"><img src="assets/sample10.jpg" alt="Artwork 10"></div>
+      <div class="art-card"><img src="assets/sample11.jpg" alt="Artwork 11"></div>
+      <div class="art-card"><img src="assets/sample12.jpg" alt="Artwork 12"></div>
+      <div class="art-card"><img src="assets/sample13.jpg" alt="Artwork 13"></div>
+      <div class="art-card"><img src="assets/sample14.jpg" alt="Artwork 14"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('baris3', 1)">&rarr;</button>
+  </div>
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('baris4', -1)">&larr;</button>
+    <section class="slider-container" id="baris4">
+      <div class="art-card"><img src="assets/sample15.jpg" alt="Artwork 15"></div>
+      <div class="art-card"><img src="assets/sample16.jpg" alt="Artwork 16"></div>
+      <div class="art-card"><img src="assets/sample17.jpg" alt="Artwork 17"></div>
+      <div class="art-card"><img src="assets/sample18.jpg" alt="Artwork 18"></div>
+      <div class="art-card"><img src="assets/sample19.jpg" alt="Artwork 19"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('baris4', 1)">&rarr;</button>
+  </div>
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('baris5', -1)">&larr;</button>
+    <section class="slider-container" id="baris5">
+      <div class="art-card"><img src="assets/sample20.jpg" alt="Artwork 20"></div>
+      <div class="art-card"><img src="assets/sample21.jpg" alt="Artwork 21"></div>
+      <div class="art-card"><img src="assets/sample22.jpg" alt="Artwork 22"></div>
+      <div class="art-card"><img src="assets/sample23.jpg" alt="Artwork 23"></div>
+      <div class="art-card"><img src="assets/sample24.jpg" alt="Artwork 24"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('baris5', 1)">&rarr;</button>
+  </div>
+  <div class="gallery-wrapper">
+    <button class="nav-arrow nav-left" onclick="scrollSlider('baris6', -1)">&larr;</button>
+    <section class="slider-container" id="baris6">
+      <div class="art-card"><img src="assets/sample25.jpg" alt="Artwork 25"></div>
+      <div class="art-card"><img src="assets/sample26.jpg" alt="Artwork 26"></div>
+      <div class="art-card"><img src="assets/sample27.jpg" alt="Artwork 27"></div>
+      <div class="art-card"><img src="assets/sample28.jpg" alt="Artwork 28"></div>
+      <div class="art-card"><img src="assets/sample29.jpg" alt="Artwork 29"></div>
+    </section>
+    <button class="nav-arrow nav-right" onclick="scrollSlider('baris6', 1)">&rarr;</button>
+  </div>
 
   <footer id="contact">
-    <p>© 2025 Nama Kamu | Email: email@example.com</p>
+    <p>© 2025 Nama Kamu | Kontak: email@example.com</p>
   </footer>
+
+  <script>
+    function scrollSlider(id, direction) {
+      const container = document.getElementById(id);
+      if (container) {
+        const scrollAmount = 340;
+        container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+    }
+  </script>
 </body>
 </html>
